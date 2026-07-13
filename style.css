@@ -10,14 +10,14 @@ body {
     min-height: 100vh;
 
     background:
-        radial-gradient(circle at top, #26384d, #06080c 70%);
+    radial-gradient(circle at top, #26384d, #05070a 70%);
 
-    color: #e8edf3;
+    color: white;
 
     font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
+    Arial,
+    Helvetica,
+    sans-serif;
 
 }
 
@@ -47,13 +47,11 @@ header {
 
 h1 {
 
-    margin: 0;
-
     font-size: 52px;
 
     letter-spacing: 10px;
 
-    color: white;
+    margin: 0;
 
 }
 
@@ -61,53 +59,43 @@ h1 {
 
 h2 {
 
-    margin-top: 5px;
+    color: #a9b5c4;
 
     font-weight: normal;
 
-    color: #9aaabd;
-
 }
 
 
 
-.controls {
-
-    margin-top: 20px;
-
-}
 
 
+button {
 
-button,
-select {
-
-    background: #1c2735;
+    background: #202d3c;
 
     color: white;
 
-    border: 1px solid #566a80;
+    border: 1px solid #52677d;
 
-    border-radius: 6px;
+    border-radius: 8px;
 
-    padding: 12px 18px;
-
-    margin: 5px;
-
-    font-size: 16px;
+    padding: 12px 20px;
 
     cursor: pointer;
 
+    font-size: 16px;
+
+}
+
+
+
+button:hover {
+
+    background: #344b62;
+
 }
 
 
-
-button:hover,
-select:hover {
-
-    background: #33475b;
-
-}
 
 
 
@@ -115,11 +103,11 @@ select:hover {
 
     background:
 
-        rgba(15,20,28,0.95);
+    rgba(15,20,28,0.95);
 
     border:
 
-        1px solid #344658;
+    1px solid #36495c;
 
     border-radius: 12px;
 
@@ -129,63 +117,65 @@ select:hover {
 
     text-align: center;
 
-    box-shadow:
-
-        0 0 25px rgba(0,0,0,0.5);
-
 }
 
 
 
-.panel h3 {
-
-    margin-top: 0;
-
-    text-transform: uppercase;
-
-    letter-spacing: 2px;
-
-    color: #a8b8ca;
-
-}
 
 
-
-.room {
+.statues {
 
     display: flex;
 
     justify-content: center;
 
-    gap: 80px;
+    gap: 35px;
+
+    flex-wrap: wrap;
 
 }
+
+
+
+.statue-card {
+
+    min-width: 150px;
+
+}
+
+
 
 
 
 .shape {
 
-    width: 130px;
+    width: 120px;
 
-    height: 130px;
+    height: 120px;
+
+    margin: auto;
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
 
-    margin: 15px auto;
+    align-items: center;
 
-    background: #202b38;
+    font-size: 75px;
 
-    border: 2px solid #53677c;
+    background:
+
+    #1b2531;
+
+    border:
+
+    2px solid #566b80;
 
     border-radius: 12px;
 
-    font-size: 80px;
-
 }
+
+
 
 
 
@@ -193,23 +183,27 @@ select:hover {
 
     display: flex;
 
-    gap: 20px;
+    justify-content: center;
+
+    gap: 25px;
 
 }
+
+
 
 
 
 .shape-button {
 
-    width: 110px;
+    width: 120px;
 
-    height: 110px;
+    height: 120px;
 
-    font-size: 60px;
-
-    padding: 0;
+    font-size: 70px;
 
 }
+
+
 
 
 
@@ -217,13 +211,15 @@ select:hover {
 
     border:
 
-        3px solid #ffffff;
+    3px solid white;
 
     transform:
 
-        scale(1.1);
+    scale(1.08);
 
 }
+
+
 
 
 
@@ -233,45 +229,11 @@ select:hover {
 
     justify-content: center;
 
-    gap: 50px;
+    gap: 40px;
 
 }
 
 
-
-.guardian {
-
-    width: 220px;
-
-    min-height: 160px;
-
-}
-
-
-
-.small-shape {
-
-    width: 90px;
-
-    height: 90px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin: 15px auto;
-
-    background: #202b38;
-
-    border: 2px solid #53677c;
-
-    border-radius: 10px;
-
-    font-size: 55px;
-
-}
 
 
 
@@ -285,19 +247,25 @@ select:hover {
 
 
 
+
+
 #log {
 
-    background: #070a0f;
+    min-height: 160px;
 
-    border-radius: 6px;
+    background:
 
-    min-height: 150px;
+    #07090d;
+
+    border-radius: 8px;
 
     padding: 15px;
 
     text-align: left;
 
-    font-family: monospace;
+    font-family:
+
+    monospace;
 
     overflow-y: auto;
 
@@ -305,33 +273,17 @@ select:hover {
 
 
 
-.actions button {
-
-    margin: 8px;
-
-}
 
 
+.actions {
 
-#hint {
+    display: flex;
 
-    background: #31536b;
+    justify-content: center;
 
-}
+    gap: 15px;
 
-
-
-#reveal {
-
-    background: #66502b;
-
-}
-
-
-
-#reset {
-
-    background: #5a3030;
+    flex-wrap: wrap;
 
 }
 
@@ -339,7 +291,7 @@ select:hover {
 
 .success {
 
-    color: #7cff92;
+    color: #6dff91;
 
 }
 
@@ -347,7 +299,7 @@ select:hover {
 
 .error {
 
-    color: #ff7777;
+    color: #ff7474;
 
 }
 
@@ -355,41 +307,22 @@ select:hover {
 
 .warning {
 
-    color: #ffd36a;
+    color: #ffd86b;
 
 }
 
 
 
-.stats {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 40px;
-
-}
 
 
-
-@media(max-width:700px) {
+@media(max-width:700px){
 
 
     h1 {
 
-        font-size: 34px;
+        font-size: 36px;
 
         letter-spacing: 5px;
-
-    }
-
-
-    .room {
-
-        flex-direction: column;
-
-        gap: 20px;
 
     }
 
@@ -398,14 +331,12 @@ select:hover {
 
         flex-direction: column;
 
-        align-items: center;
+        gap: 15px;
 
     }
 
 
-    .stats {
-
-        flex-direction: column;
+    .inventory {
 
         gap: 10px;
 

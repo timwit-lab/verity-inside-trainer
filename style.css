@@ -302,3 +302,64 @@ footer {
     }
 
 }
+
+.shape,
+.inventoryShape {
+
+    position: relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+}
+
+
+.shapeIcon {
+
+    font-size:45px;
+
+}
+
+
+.shapeName {
+
+    font-size:12px;
+    margin-top:5px;
+    color:#aebdcc;
+
+}
+
+
+.inventoryShape:hover {
+
+    box-shadow:
+    0 0 15px rgba(255,255,255,0.4);
+
+}
+
+
+
+.selected {
+
+    border:2px solid white;
+
+    transform:scale(1.1);
+
+}
+
+
+
+.success {
+
+    color:#7cff8b;
+
+}
+
+
+
+.error {
+
+    color:#ff7777;
+
+}

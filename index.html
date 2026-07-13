@@ -38,61 +38,45 @@ New Encounter
 
 <section class="panel">
 
-
-<h3>Your Room</h3>
-
-
-<div class="room">
+<h3>Statues</h3>
 
 
-<div class="statue-area">
+<div class="statues">
 
 
-<p>Your Statue</p>
+<div class="statue-card">
 
+<p>You</p>
 
 <div id="yourStatue" class="shape">
-
 ?
+</div>
 
 </div>
 
 
-</div>
 
+<div class="statue-card">
 
+<p>Guardian A</p>
 
-
-
-<div class="inventory-area">
-
-
-<p>Your Shapes</p>
-
-
-<div class="inventory">
-
-
-<button id="inventory1" class="shape-button">
-
+<div id="guardianAStatue" class="shape">
 ?
+</div>
 
-</button>
+</div>
 
 
 
-<button id="inventory2" class="shape-button">
+<div class="statue-card">
 
+<p>Guardian B</p>
+
+<div id="guardianBStatue" class="shape">
 ?
-
-</button>
-
-
 </div>
 
-
 </div>
-
 
 
 </div>
@@ -109,40 +93,58 @@ New Encounter
 <section class="panel">
 
 
-<h3>Send Shape To</h3>
+<h3>Your Shapes</h3>
 
 
-<div class="guardians">
+<div class="inventory">
 
 
-<button id="guardian1" class="guardian">
-
-
-Guardian A
-
-
+<button id="inventory1" class="shape-button">
+?
 </button>
 
 
-
-
-<button id="guardian2" class="guardian">
-
-
-Guardian B
-
-
+<button id="inventory2" class="shape-button">
+?
 </button>
 
 
 </div>
 
 
-<p class="info">
+</section>
 
-Choose which guardian receives the selected shape.
 
-</p>
+
+
+
+
+
+<section class="panel">
+
+
+<h3>Send Selected Shape To</h3>
+
+
+<div class="guardians">
+
+
+<button id="guardian1">
+
+Guardian A
+
+</button>
+
+
+
+<button id="guardian2">
+
+Guardian B
+
+</button>
+
+
+</div>
 
 
 </section>
@@ -182,7 +184,6 @@ Press New Encounter
 
 <div id="log">
 
-
 </div>
 
 
@@ -194,7 +195,7 @@ Press New Encounter
 
 
 
-<section class="panel actions">
+<section class="panel">
 
 
 <button id="hint">
@@ -228,43 +229,28 @@ Clear Selection
 
 
 
-<section class="panel stats">
+<section class="panel">
 
 
 <h3>Stats</h3>
 
 
 <p>
-
 Solves:
-<span id="solves">
-0
-</span>
-
+<span id="solves">0</span>
 </p>
 
 
-
 <p>
-
 Best Time:
-<span id="bestTime">
---
-</span>
-
+<span id="bestTime">--</span>
 </p>
-
 
 
 <p>
-
 Time:
-<span id="timer">
-0
-</span>s
-
+<span id="timer">0</span>s
 </p>
-
 
 
 </section>

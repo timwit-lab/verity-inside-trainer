@@ -5,7 +5,8 @@ let game = {
     inventory: [],
     guardians: [],
     phase: 1,
-    selectedShape: null
+    selectedShape: null,
+    sentCount: 0
 };
 
 
@@ -20,19 +21,13 @@ const phaseText = document.getElementById("phaseText");
 const log = document.getElementById("log");
 
 
-function randomItem(array){
-
-    return array[
-        Math.floor(Math.random()*array.length)
-    ];
-
+function randomItem(arr){
+    return arr[Math.floor(Math.random()*arr.length)];
 }
 
 
 function writeLog(text){
-
     log.innerHTML += `<div>${text}</div>`;
-
 }
 
 
@@ -42,6 +37,7 @@ function newPuzzle(){
     log.innerHTML="";
 
     game.phase=1;
+    game.sentCount=0;
 
 
     game.playerShape=randomItem(shapes);
@@ -58,25 +54,16 @@ function newPuzzle(){
         {
             name:"Guardian A",
             shape:others[0],
-            inventory:[]
+            inventory:[others[0], others[1]]
         },
 
         {
             name:"Guardian B",
             shape:others[1],
-            inventory:[]
+            inventory:[others[1], others[0]]
         }
 
     ];
-
-
-
-    /*
-      Create a valid Verity starting state.
-
-      Everyone starts holding their own shape
-      and one shape belonging to another guardian.
-    */
 
 
     game.inventory=[
@@ -88,35 +75,14 @@ function newPuzzle(){
     ];
 
 
-
-    game.guardians.forEach(g=>{
-
-        let possible =
-            shapes.filter(
-                s=>s!==g.shape
-            );
-
-
-        g.inventory=[
-
-            g.shape,
-
-            randomItem(possible)
-
-        ];
-
-    });
-
-
-
     updateUI();
 
 
     phaseText.innerHTML =
-    "Phase 1: Give away the shape that is NOT yours.";
+    "Phase 1: Send the shape that is not yours.";
 
     writeLog(
-        "Find the shape that isn't your statue."
+    "Keep your own shape. Send the other shape to its statue."
     );
 
 }
@@ -125,68 +91,76 @@ function newPuzzle(){
 
 function updateUI(){
 
-    statueShape.innerHTML=
-        game.playerShape;
+    statueShape.innerHTML =
+    game.playerShape;
 
 
-    shape1.innerHTML=
-        game.inventory[0] ?? "";
+    shape1.innerHTML =
+    game.inventory[0] || "";
 
 
-    shape2.innerHTML=
-        game.inventory[1] ?? "";
+    shape2.innerHTML =
+    game.inventory[1] || "";
 
 
-    leftStatue.innerHTML=
-        game.guardians[0].shape;
+    leftStatue.innerHTML =
+    game.guardians[0].shape;
 
 
-    rightStatue.innerHTML=
-        game.guardians[1].shape;
+    rightStatue.innerHTML =
+    game.guardians[1].shape;
 
 }
 
 
 
-function selectShape(number){
+function selectShape(index){
+
+    if(!game.inventory[index]) return;
 
     game.selectedShape =
-        game.inventory[number];
+    game.inventory[index];
 
 
     writeLog(
-        `Selected ${game.selectedShape}`
+    `Selected ${game.selectedShape}`
     );
 
 }
 
 
 
-function depositToGuardian(index){
-
+function deposit(index){
 
     if(!game.selectedShape){
 
-        writeLog(
-            "Select a shape first."
-        );
-
+        writeLog("Select a shape first.");
         return;
 
     }
 
 
     let guardian =
-        game.guardians[index];
+    game.guardians[index];
 
 
 
-    /*
-      Correct play:
-      You keep your own shape.
-      You send the other shape
-      to the statue holding it.
-    */
+    if(game.phase===1){
+
+        phaseOneDeposit(guardian);
+
+    }
+    else {
+
+        phaseTwoDeposit(guardian);
+
+    }
+
+}
+
+
+
+function phaseOneDeposit(guardian){
 
 
     if(
@@ -194,11 +168,10 @@ function depositToGuardian(index){
     ){
 
         writeLog(
-        "❌ Do not send your own shape. Keep it."
+        "❌ Keep your own shape."
         );
 
         return;
-
     }
 
 
@@ -208,7 +181,68 @@ function depositToGuardian(index){
     ){
 
         writeLog(
-        "❌ That guardian does not need this shape."
+        "❌ Send it to the statue holding that shape."
+        );
+
+        return;
+    }
+
+
+
+    removeSelected();
+
+
+    guardian.inventory.push(
+        game.selectedShape
+    );
+
+
+    writeLog(
+    `✓ Sent ${game.selectedShape} to ${guardian.name}`
+    );
+
+
+    game.selectedShape=null;
+
+
+
+    // other guardians magically finish
+
+    game.inventory=[
+
+        game.playerShape,
+        game.playerShape
+
+    ];
+
+
+    game.phase=2;
+
+
+    phaseText.innerHTML =
+    "Phase 2: Give one copy of your shape to each guardian.";
+
+
+    writeLog(
+    "Everyone now has double their own shape."
+    );
+
+
+    updateUI();
+
+}
+
+
+
+function phaseTwoDeposit(guardian){
+
+
+    if(
+        game.selectedShape !== game.playerShape
+    ){
+
+        writeLog(
+        "❌ You should only give your own shape now."
         );
 
         return;
@@ -217,83 +251,79 @@ function depositToGuardian(index){
 
 
 
+    removeSelected();
+
+
     guardian.inventory.push(
-        game.selectedShape
+        game.playerShape
     );
 
 
-    game.inventory.splice(
-
-        game.inventory.indexOf(
-            game.selectedShape
-        ),
-
-        1
-
-    );
-
+    game.sentCount++;
 
 
     writeLog(
-        `✓ Sent ${game.selectedShape} to ${guardian.name}`
+    `Sent ${game.playerShape} to ${guardian.name}`
     );
-
 
 
     game.selectedShape=null;
 
 
-    resolveFirstPhase();
+
+    if(game.sentCount===2){
+
+        finishEncounter();
+
+    }
 
 
+    updateUI();
 
 }
 
 
 
-function resolveFirstPhase(){
+function removeSelected(){
 
 
-    /*
-       If the player has only their own shape left,
-       simulate the other two guardians.
-    */
+    let index =
+    game.inventory.indexOf(
+        game.selectedShape
+    );
 
 
-    if(
+    game.inventory.splice(index,1);
 
-        game.inventory.length===1
-        &&
-        game.inventory[0]===game.playerShape
-
-    ){
+}
 
 
-        writeLog(
-        "Other guardians complete their swaps..."
+
+function finishEncounter(){
+
+
+    let finalShapes =
+        shapes.filter(
+            s=>s!==game.playerShape
         );
 
 
+    game.inventory=[
 
-        game.inventory=[
+        finalShapes[0],
+        finalShapes[1]
 
-            game.playerShape,
-
-            game.playerShape
-
-        ];
+    ];
 
 
 
-        phaseText.innerHTML =
-        "Phase 2: You have doubles! Give one to each guardian.";
+    phaseText.innerHTML =
+    "SUCCESS: Key created!";
 
 
-
-        game.phase=2;
-
-
-    }
+    writeLog(
+    `Your key is ${finalShapes[0]} + ${finalShapes[1]}`
+    );
 
 
     updateUI();
@@ -310,22 +340,24 @@ shape2.onclick =
 ()=>selectShape(1);
 
 
+
 document
 .getElementById("guardianLeft")
-.onclick=
-()=>depositToGuardian(0);
+.onclick =
+()=>deposit(0);
+
 
 
 document
 .getElementById("guardianRight")
-.onclick=
-()=>depositToGuardian(1);
+.onclick =
+()=>deposit(1);
 
 
 
 document
 .getElementById("newPuzzle")
-.onclick=
+.onclick =
 newPuzzle;
 
 
@@ -334,26 +366,15 @@ document
 .getElementById("revealButton")
 .onclick=function(){
 
-
-    writeLog(
-        "=== SECRET STATE ==="
-    );
-
-
-    writeLog(
-        "Your shape: "
-        +game.playerShape
-    );
-
+    writeLog("=== SECRET INFO ===");
 
     game.guardians.forEach(g=>{
 
         writeLog(
-        `${g.name}: ${g.shape} ${g.inventory.join(" ")}`
+        `${g.name}: ${g.shape} | ${g.inventory.join(" ")}`
         );
 
     });
-
 
 };
 

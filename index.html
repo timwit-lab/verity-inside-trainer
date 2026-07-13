@@ -1,141 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Verity Inside Trainer</title>
+<title>Verity Inside Room Trainer</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
+
 <body>
 
+
 <div class="container">
+
 
 <header>
 
 <h1>VERITY</h1>
+
 <h2>Inside Room Trainer</h2>
 
-<button id="newPuzzle">
-New Puzzle
+
+<div class="controls">
+
+<button id="newGame">
+New Encounter
 </button>
+
+
+<select id="difficulty">
+
+<option value="training">
+Training Mode
+</option>
+
+<option value="raid">
+Raid Mode
+</option>
+
+</select>
+
+
+</div>
 
 </header>
 
 
-<section class="card">
 
-<h3>Your Statue</h3>
 
-<div id="statueShape" class="shape large">
+
+<section class="panel">
+
+<h3>Your Guardian</h3>
+
+
+<div class="guardianBox">
+
+
+<div>
+
+Your Statue
+
+<div id="playerStatue" class="shape">
 ?
+</div>
+
+
+</div>
+
+
+
+<div>
+
+Your Inventory
+
+<div id="inventory" class="inventory">
+
+<button id="slot1">
+?
+</button>
+
+
+<button id="slot2">
+?
+</button>
+
+</div>
+
+</div>
+
+
 </div>
 
 </section>
 
 
 
-<section class="card">
-
-<h3>Your Inventory</h3>
-
-<div id="inventory">
-
-<button id="shape1" class="inventoryShape">
-?
-</button>
-
-<button id="shape2" class="inventoryShape">
-?
-</button>
-
-</div>
-
-</section>
 
 
 
-<section class="card">
+
+
+<section class="panel">
 
 <h3>Other Guardians</h3>
 
 
-<div class="guardianRow">
+<div class="others">
 
 
-<button id="guardianLeft" class="guardian">
+<button id="guardianA" class="otherGuardian">
 
+<div>
 Guardian A
+</div>
 
-<div id="leftStatue" class="shape">
+<div id="statueA" class="shape small">
 ?
 </div>
+
 
 </button>
 
 
 
-<button id="guardianRight" class="guardian">
+<button id="guardianB" class="otherGuardian">
 
+
+<div>
 Guardian B
+</div>
 
-<div id="rightStatue" class="shape">
+
+<div id="statueB" class="shape small">
 ?
 </div>
 
+
 </button>
 
 
 </div>
 
+
 </section>
 
 
 
-<section class="card">
 
-<h3>Phase</h3>
 
-<div id="phaseText">
-Press New Puzzle
+
+
+
+
+<section class="panel">
+
+
+<h3>Encounter Status</h3>
+
+
+<div id="status">
+
+Press New Encounter
+
 </div>
 
-</section>
-
-
-
-<section class="card">
-
-<h3>Log</h3>
-
-<div id="log"></div>
 
 </section>
 
 
 
-<footer>
 
-<button id="checkButton">
-Check
+
+
+
+
+<section class="panel">
+
+
+<h3>Action Log</h3>
+
+
+<div id="log">
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="panel">
+
+
+<h3>Training Tools</h3>
+
+
+<button id="hint">
+Hint
 </button>
 
 
-<button id="revealButton">
+<button id="reveal">
 Reveal Solution
 </button>
 
 
-</footer>
+<button id="reset">
+Reset Move
+</button>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="panel stats">
+
+
+<h3>Stats</h3>
+
+
+<div>
+
+Solved:
+
+<span id="solved">
+0
+</span>
+
+</div>
+
+
+<div>
+
+Best Time:
+
+<span id="best">
+--
+
+</span>
+
+</div>
+
+
+<div>
+
+Timer:
+
+<span id="timer">
+0
+
+</span>s
+
+</div>
+
+
+</section>
+
+
+
 
 
 </div>
 
 
+
 <script src="script.js"></script>
 
+
 </body>
+
 </html>

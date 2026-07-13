@@ -5,23 +5,19 @@
 
 body {
 
-    margin:0;
+    margin: 0;
 
-    min-height:100vh;
+    min-height: 100vh;
 
     background:
-    radial-gradient(
-        circle at top,
-        #263445,
-        #07090d 70%
-    );
+        radial-gradient(circle at top, #26384d, #06080c 70%);
 
-    color:#e8edf2;
+    color: #e8edf3;
 
     font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
 }
 
@@ -29,11 +25,11 @@ body {
 
 .container {
 
-    max-width:950px;
+    max-width: 950px;
 
-    margin:auto;
+    margin: auto;
 
-    padding:20px;
+    padding: 20px;
 
 }
 
@@ -41,9 +37,9 @@ body {
 
 header {
 
-    text-align:center;
+    text-align: center;
 
-    margin-bottom:25px;
+    margin-bottom: 25px;
 
 }
 
@@ -51,11 +47,13 @@ header {
 
 h1 {
 
-    margin:0;
+    margin: 0;
 
-    font-size:52px;
+    font-size: 52px;
 
-    letter-spacing:10px;
+    letter-spacing: 10px;
+
+    color: white;
 
 }
 
@@ -63,20 +61,19 @@ h1 {
 
 h2 {
 
-    margin-top:5px;
+    margin-top: 5px;
 
-    color:#9caec1;
+    font-weight: normal;
 
-    font-weight:normal;
+    color: #9aaabd;
 
 }
 
 
 
-
 .controls {
 
-    margin-top:20px;
+    margin-top: 20px;
 
 }
 
@@ -85,30 +82,21 @@ h2 {
 button,
 select {
 
+    background: #1c2735;
 
-    background:#202c3a;
+    color: white;
 
-    color:white;
+    border: 1px solid #566a80;
 
-    border:
+    border-radius: 6px;
 
-    1px solid #53677b;
+    padding: 12px 18px;
 
+    margin: 5px;
 
-    border-radius:6px;
+    font-size: 16px;
 
-
-    padding:12px 18px;
-
-
-    margin:5px;
-
-
-    font-size:16px;
-
-
-    cursor:pointer;
-
+    cursor: pointer;
 
 }
 
@@ -117,81 +105,59 @@ select {
 button:hover,
 select:hover {
 
-    background:#34475b;
+    background: #33475b;
 
 }
-
-
 
 
 
 .panel {
 
-
     background:
 
-    rgba(14,18,25,.94);
-
+        rgba(15,20,28,0.95);
 
     border:
 
-    1px solid #344354;
+        1px solid #344658;
 
+    border-radius: 12px;
 
-    border-radius:10px;
+    padding: 20px;
 
+    margin-bottom: 15px;
 
-    padding:20px;
-
-
-    margin-bottom:15px;
-
+    text-align: center;
 
     box-shadow:
 
-    0 0 25px rgba(0,0,0,.45);
-
-
-    text-align:center;
-
+        0 0 25px rgba(0,0,0,0.5);
 
 }
-
 
 
 
 .panel h3 {
 
+    margin-top: 0;
 
-    margin-top:0;
+    text-transform: uppercase;
 
+    letter-spacing: 2px;
 
-    color:#a8b8ca;
-
-
-    text-transform:uppercase;
-
-
-    letter-spacing:2px;
-
+    color: #a8b8ca;
 
 }
 
 
 
+.room {
 
+    display: flex;
 
-.guardianBox {
+    justify-content: center;
 
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    gap:70px;
-
+    gap: 80px;
 
 }
 
@@ -199,175 +165,157 @@ select:hover {
 
 .shape {
 
+    width: 130px;
 
-    width:130px;
+    height: 130px;
 
+    display: flex;
 
-    height:130px;
+    align-items: center;
 
+    justify-content: center;
 
-    margin:15px auto;
+    margin: 15px auto;
 
+    background: #202b38;
 
-    display:flex;
+    border: 2px solid #53677c;
 
+    border-radius: 12px;
 
-    justify-content:center;
-
-
-    align-items:center;
-
-
-    background:#1d2733;
-
-
-    border:
-
-    2px solid #53677b;
-
-
-    border-radius:12px;
-
-
-    font-size:80px;
-
+    font-size: 80px;
 
 }
-
-
-
-.shape.small {
-
-
-    width:90px;
-
-
-    height:90px;
-
-
-    font-size:55px;
-
-
-}
-
 
 
 
 .inventory {
 
+    display: flex;
 
-    display:flex;
-
-
-    gap:20px;
-
+    gap: 20px;
 
 }
 
 
 
-.inventory button {
+.shape-button {
 
+    width: 110px;
 
-    width:110px;
+    height: 110px;
 
+    font-size: 60px;
 
-    height:110px;
-
-
-    font-size:60px;
-
-
-    padding:0;
-
+    padding: 0;
 
 }
 
 
 
+.selected {
 
-.others {
+    border:
 
+        3px solid #ffffff;
 
-    display:flex;
+    transform:
 
-
-    justify-content:center;
-
-
-    gap:50px;
-
+        scale(1.1);
 
 }
 
 
 
+.guardians {
 
-.otherGuardian {
+    display: flex;
 
+    justify-content: center;
 
-    width:220px;
-
-
-    min-height:150px;
-
+    gap: 50px;
 
 }
 
+
+
+.guardian {
+
+    width: 220px;
+
+    min-height: 160px;
+
+}
+
+
+
+.small-shape {
+
+    width: 90px;
+
+    height: 90px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 15px auto;
+
+    background: #202b38;
+
+    border: 2px solid #53677c;
+
+    border-radius: 10px;
+
+    font-size: 55px;
+
+}
 
 
 
 #status {
 
+    min-height: 40px;
 
-    min-height:45px;
-
-
-    font-size:20px;
-
-
-    color:#d6e2ef;
-
+    font-size: 20px;
 
 }
-
-
 
 
 
 #log {
 
+    background: #070a0f;
 
-    min-height:150px;
+    border-radius: 6px;
 
+    min-height: 150px;
 
-    background:#080b10;
+    padding: 15px;
 
+    text-align: left;
 
-    border-radius:6px;
+    font-family: monospace;
 
-
-    padding:15px;
-
-
-    text-align:left;
-
-
-    font-family:monospace;
-
-
-    overflow:auto;
-
+    overflow-y: auto;
 
 }
 
 
 
+.actions button {
+
+    margin: 8px;
+
+}
+
+
 
 #hint {
 
-
-    background:#345a73;
+    background: #31536b;
 
 }
 
@@ -375,8 +323,7 @@ select:hover {
 
 #reveal {
 
-
-    background:#66502c;
+    background: #66502b;
 
 }
 
@@ -384,35 +331,15 @@ select:hover {
 
 #reset {
 
-
-    background:#5b3030;
-
-}
-
-
-
-
-
-.stats {
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    gap:40px;
-
+    background: #5a3030;
 
 }
-
 
 
 
 .success {
 
-    color:#79ff91;
+    color: #7cff92;
 
 }
 
@@ -420,7 +347,7 @@ select:hover {
 
 .error {
 
-    color:#ff7777;
+    color: #ff7777;
 
 }
 
@@ -428,48 +355,59 @@ select:hover {
 
 .warning {
 
-    color:#ffd36a;
+    color: #ffd36a;
 
 }
 
 
 
+.stats {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 40px;
+
+}
 
 
 
-@media(max-width:700px){
+@media(max-width:700px) {
 
 
     h1 {
 
-        font-size:35px;
+        font-size: 34px;
+
+        letter-spacing: 5px;
 
     }
 
 
-    .guardianBox {
+    .room {
 
-        flex-direction:column;
+        flex-direction: column;
 
-        gap:20px;
+        gap: 20px;
 
     }
 
 
-    .others {
+    .guardians {
 
-        flex-direction:column;
+        flex-direction: column;
 
-        align-items:center;
+        align-items: center;
 
     }
 
 
     .stats {
 
-        flex-direction:column;
+        flex-direction: column;
 
-        gap:10px;
+        gap: 10px;
 
     }
 

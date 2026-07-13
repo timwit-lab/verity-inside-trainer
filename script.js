@@ -1,4 +1,10 @@
-const shapes = ["▲", "●", "■"];
+const shapeNames = {
+
+    "▲":"Triangle",
+    "●":"Circle",
+    "■":"Square"
+
+};
 
 let game = {
     playerShape: "",
@@ -91,30 +97,91 @@ function newPuzzle(){
 
 function updateUI(){
 
-    statueShape.innerHTML =
-    game.playerShape;
+
+    updateShapeDisplay(
+        statueShape,
+        game.playerShape
+    );
 
 
-    shape1.innerHTML =
-    game.inventory[0] || "";
+    updateButtonShape(
+        shape1,
+        game.inventory[0]
+    );
 
 
-    shape2.innerHTML =
-    game.inventory[1] || "";
+    updateButtonShape(
+        shape2,
+        game.inventory[1]
+    );
 
 
-    leftStatue.innerHTML =
-    game.guardians[0].shape;
+    updateShapeDisplay(
+        leftStatue,
+        game.guardians[0].shape
+    );
 
 
-    rightStatue.innerHTML =
-    game.guardians[1].shape;
+    updateShapeDisplay(
+        rightStatue,
+        game.guardians[1].shape
+    );
+
+}
+
+function updateShapeDisplay(element, shape){
+
+    if(!shape){
+
+        element.innerHTML="?";
+        return;
+
+    }
+
+
+    element.innerHTML = `
+
+        <span class="shapeIcon">
+            ${shape}
+        </span>
+
+        <span class="shapeName">
+            ${shapeNames[shape]}
+        </span>
+
+    `;
 
 }
 
 
 
-function selectShape(index){
+function updateButtonShape(button, shape){
+
+    if(!shape){
+
+        button.innerHTML="";
+        return;
+
+    }
+
+
+    button.innerHTML = `
+
+        <span class="shapeIcon">
+            ${shape}
+        </span>
+
+        <span class="shapeName">
+            ${shapeNames[shape]}
+        </span>
+
+    `;
+
+}
+
+
+
+function selectShape(or index){
 
     if(!game.inventory[index]) return;
 

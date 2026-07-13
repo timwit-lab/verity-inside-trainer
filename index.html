@@ -1,139 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verity Inside Trainer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style.css">
+<title>Verity Inside Trainer</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <header>
-        <h1>VERITY</h1>
-        <h2>Inside Room Trainer</h2>
+<header>
 
-        <button id="newPuzzle">
-            New Puzzle
-        </button>
-    </header>
+<h1>VERITY</h1>
+<h2>Inside Room Trainer</h2>
 
-    <main>
-
-        <section class="card">
-
-            <h3>Your Statue</h3>
-
-        <div id="statueShape" class="shape large">
-    <span class="shapeIcon">?</span>
-    <span class="shapeName"></span>
-</div>
-
-        </section>
-
-        <section class="card">
-
-            <h3>Your Inventory</h3>
-
-            <div id="inventory">
-
-                <button class="inventoryShape" id="shape1">
-    <span class="shapeIcon">?</span>
-    <span class="shapeName"></span>
+<button id="newPuzzle">
+New Puzzle
 </button>
 
-<button class="inventoryShape" id="shape2">
-    <span class="shapeIcon">?</span>
-    <span class="shapeName"></span>
+</header>
+
+
+<section class="card">
+
+<h3>Your Statue</h3>
+
+<div id="statueShape" class="shape large">
+?
+</div>
+
+</section>
+
+
+
+<section class="card">
+
+<h3>Your Inventory</h3>
+
+<div id="inventory">
+
+<button id="shape1" class="inventoryShape">
+?
 </button>
 
-            </div>
-
-        </section>
-
-        <section class="card">
-
-            <h3>Other Guardians</h3>
-
-            <div class="guardianRow">
-
-                <button class="guardian" id="guardianLeft">
-
-                    <div class="guardianName">
-
-                        Guardian A
-
-                    </div>
-
-                    <div id="leftStatue" class="shape">
-    <span class="shapeIcon">?</span>
-    <span class="shapeName"></span>
-</div>
-
-                </button>
-
-                <button class="guardian" id="guardianRight">
-
-                    <div class="guardianName">
-
-                        Guardian B
-
-                    </div>
-
-                    <div id="rightStatue" class="shape">
-    <span class="shapeIcon">?</span>
-    <span class="shapeName"></span>
-</div>
-                </button>
-
-            </div>
-
-        </section>
-
-        <section class="card">
-
-            <h3>Current Phase</h3>
-
-            <div id="phaseText">
-
-                Press "New Puzzle"
-
-            </div>
-
-        </section>
-
-        <section class="card">
-
-            <h3>Encounter Log</h3>
-
-            <div id="log">
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <footer>
-
-        <button id="checkButton">
-
-            Check
-
-        </button>
-
-        <button id="revealButton">
-
-            Reveal Solution
-
-        </button>
-
-    </footer>
+<button id="shape2" class="inventoryShape">
+?
+</button>
 
 </div>
+
+</section>
+
+
+
+<section class="card">
+
+<h3>Other Guardians</h3>
+
+
+<div class="guardianRow">
+
+
+<button id="guardianLeft" class="guardian">
+
+Guardian A
+
+<div id="leftStatue" class="shape">
+?
+</div>
+
+</button>
+
+
+
+<button id="guardianRight" class="guardian">
+
+Guardian B
+
+<div id="rightStatue" class="shape">
+?
+</div>
+
+</button>
+
+
+</div>
+
+</section>
+
+
+
+<section class="card">
+
+<h3>Phase</h3>
+
+<div id="phaseText">
+Press New Puzzle
+</div>
+
+</section>
+
+
+
+<section class="card">
+
+<h3>Log</h3>
+
+<div id="log"></div>
+
+</section>
+
+
+
+<footer>
+
+<button id="checkButton">
+Check
+</button>
+
+
+<button id="revealButton">
+Reveal Solution
+</button>
+
+
+</footer>
+
+
+</div>
+
 
 <script src="script.js"></script>
 

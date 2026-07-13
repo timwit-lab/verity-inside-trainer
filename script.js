@@ -1,6 +1,6 @@
 const SHAPES = ["▲", "●", "■"];
 
-const NAMES = {
+const SHAPE_NAMES = {
     "▲": "Triangle",
     "●": "Circle",
     "■": "Square"
@@ -13,22 +13,24 @@ let game = {
 
     guardians: [],
 
-    phase: 0,
+    phase: 1,
 
     selectedSlot: null,
 
     startTime: null,
 
-    timer: null
+    timer: null,
+
+    solved: false
 
 };
 
 
 let stats = {
 
-    solved: 0,
+    solves: 0,
 
-    best: null
+    bestTime: null
 
 };
 
@@ -36,60 +38,69 @@ let stats = {
 
 // Elements
 
-const playerStatue =
-document.getElementById("playerStatue");
+const yourStatue =
+document.getElementById("yourStatue");
 
-const statueA =
-document.getElementById("statueA");
+const inventory1 =
+document.getElementById("inventory1");
 
-const statueB =
-document.getElementById("statueB");
+const inventory2 =
+document.getElementById("inventory2");
 
+const guardianStatue1 =
+document.getElementById("guardianStatue1");
 
-const slot1 =
-document.getElementById("slot1");
-
-const slot2 =
-document.getElementById("slot2");
-
+const guardianStatue2 =
+document.getElementById("guardianStatue2");
 
 const status =
 document.getElementById("status");
 
-
 const log =
 document.getElementById("log");
 
+const mode =
+document.getElementById("mode");
 
-const difficulty =
-document.getElementById("difficulty");
+const timerDisplay =
+document.getElementById("timer");
+
+const solvesDisplay =
+document.getElementById("solves");
+
+const bestDisplay =
+document.getElementById("bestTime");
 
 
 
 
+// Utility
 
 
-function random(arr){
+function random(array){
 
-    return arr[Math.floor(Math.random()*arr.length)];
+    return array[
+        Math.floor(Math.random()*array.length)
+    ];
 
 }
 
 
 
-
-
-function write(text,type=""){
+function write(message,type=""){
 
     log.innerHTML +=
-    `<div class="${type}">${text}</div>`;
+    `<div class="${type}">${message}</div>`;
 
-    log.scrollTop = log.scrollHeight;
+    log.scrollTop =
+    log.scrollHeight;
 
 }
 
 
 
+
+// Create encounter
 
 
 function newEncounter(){
@@ -103,21 +114,10 @@ function newEncounter(){
 
     game.phase=1;
 
-
     game.selectedSlot=null;
 
+    game.solved=false;
 
-    game.startTime=Date.now();
-
-
-
-    startTimer();
-
-
-
-    /*
-        Pick player shape
-    */
 
 
     let playerShape =
@@ -127,19 +127,22 @@ function newEncounter(){
 
     let others =
     SHAPES.filter(
-        x=>x!==playerShape
+        s=>s!==playerShape
     );
 
 
 
     /*
-        Create the three rooms
+       Generate valid starting state
+
+       Each guardian has:
+       - their own shape
+       - one foreign shape
+
     */
 
 
-    game.player = {
-
-        name:"You",
+    game.player={
 
         shape:playerShape,
 
@@ -157,6 +160,7 @@ function newEncounter(){
 
     game.guardians=[
 
+
         {
 
             name:"Guardian A",
@@ -167,7 +171,11 @@ function newEncounter(){
 
                 others[0],
 
-                playerShape
+                random(
+                    SHAPES.filter(
+                        x=>x!==others[0]
+                    )
+                )
 
             ]
 
@@ -184,7 +192,11 @@ function newEncounter(){
 
                 others[1],
 
-                others[0]
+                random(
+                    SHAPES.filter(
+                        x=>x!==others[1]
+                    )
+                )
 
             ]
 
@@ -194,76 +206,73 @@ function newEncounter(){
 
 
 
+    startTimer();
+
+
     update();
 
 
+
     status.innerHTML =
-
-    "Phase 1: Send away the shape that is not your statue.";
-
+    "Phase 1: Send away the shape that is not yours.";
 
 
     write(
-
-    "Your statue is " +
-    NAMES[playerShape]
-
+        "Your statue is " +
+        SHAPE_NAMES[playerShape]
     );
 
 
     write(
-
-    "Keep your own shape. Give the other shape away."
-
+        "Keep your own shape. Send the other shape to its matching guardian."
     );
-
 
 }
 
 
 
 
+// Update UI
 
 
 function update(){
 
 
-    playerStatue.innerHTML =
+    yourStatue.innerHTML =
     game.player.shape;
 
 
-
-    slot1.innerHTML =
+    inventory1.innerHTML =
     game.player.inventory[0] || "";
 
 
-
-    slot2.innerHTML =
+    inventory2.innerHTML =
     game.player.inventory[1] || "";
 
 
 
-    /*
-        Raid mode hides other statue details
-    */
+    if(mode.value==="training"){
 
 
-    if(difficulty.value==="raid"){
-
-        statueA.innerHTML="?";
-
-        statueB.innerHTML="?";
-
-    }
-
-    else {
-
-        statueA.innerHTML =
+        guardianStatue1.innerHTML =
         game.guardians[0].shape;
 
 
-        statueB.innerHTML =
+        guardianStatue2.innerHTML =
         game.guardians[1].shape;
+
+
+    }
+    else{
+
+
+        guardianStatue1.innerHTML =
+        "?";
+
+
+        guardianStatue2.innerHTML =
+        "?";
+
 
     }
 
@@ -273,9 +282,10 @@ function update(){
 
 
 
+// Inventory selection
 
 
-function selectSlot(slot){
+function selectInventory(slot){
 
 
     if(!game.player.inventory[slot])
@@ -285,13 +295,25 @@ function selectSlot(slot){
     game.selectedSlot=slot;
 
 
+    inventory1.classList.remove("selected");
+    inventory2.classList.remove("selected");
+
+
+    if(slot===0)
+
+        inventory1.classList.add("selected");
+
+
+    else
+
+        inventory2.classList.add("selected");
+
+
     write(
-
-    "Selected " +
-    NAMES[
-    game.player.inventory[slot]
-    ]
-
+        "Selected " +
+        SHAPE_NAMES[
+            game.player.inventory[slot]
+        ]
     );
 
 }
@@ -299,15 +321,17 @@ function selectSlot(slot){
 
 
 
+// Sending shapes
 
-function sendToGuardian(index){
+
+function sendToGuardian(number){
 
 
     if(game.selectedSlot===null){
 
         write(
-        "Select a shape first.",
-        "warning"
+            "Select a shape first.",
+            "warning"
         );
 
         return;
@@ -318,17 +342,15 @@ function sendToGuardian(index){
 
     if(game.phase===1){
 
-        phaseOne(index);
+        phaseOne(number);
 
     }
-
 
     else if(game.phase===2){
 
-        phaseTwo(index);
+        phaseTwo(number);
 
     }
-
 
 }
 
@@ -336,9 +358,7 @@ function sendToGuardian(index){
 
 
 
-
-
-function phaseOne(index){
+function phaseOne(number){
 
 
     let shape =
@@ -347,9 +367,8 @@ function phaseOne(index){
     ];
 
 
-
     let guardian =
-    game.guardians[index];
+    game.guardians[number];
 
 
 
@@ -357,8 +376,8 @@ function phaseOne(index){
 
 
         write(
-        "Wrong: keep your own shape.",
-        "error"
+            "Wrong: keep your own shape.",
+            "error"
         );
 
         return;
@@ -371,8 +390,8 @@ function phaseOne(index){
 
 
         write(
-        "Wrong guardian for that shape.",
-        "error"
+            "Wrong guardian. That shape belongs elsewhere.",
+            "error"
         );
 
         return;
@@ -384,36 +403,21 @@ function phaseOne(index){
     removeSelected();
 
 
+
     write(
-
-    "Sent " +
-    NAMES[shape] +
-    " to " +
-    guardian.name
-
+        "Sent " +
+        SHAPE_NAMES[shape] +
+        " to " +
+        guardian.name,
+        "success"
     );
 
 
 
     /*
-        Simulate other guardians doing
-        the same correct strategy
+       Simulate all three guardians
+       reaching the double state
     */
-
-
-    resolvePhaseOne();
-
-
-
-}
-
-
-
-
-
-
-
-function resolvePhaseOne(){
 
 
     game.player.inventory=[
@@ -429,26 +433,19 @@ function resolvePhaseOne(){
     game.phase=2;
 
 
-    game.selectedSlot=null;
-
-
-
-    update();
-
-
-
     status.innerHTML =
-
     "Phase 2: Give one copy of your shape to each guardian.";
 
 
-
     write(
-
-    "All guardians now have doubles."
-
+        "All guardians now have double their own shape."
     );
 
+
+
+    clearSelection();
+
+    update();
 
 
 }
@@ -458,12 +455,7 @@ function resolvePhaseOne(){
 
 
 
-function phaseTwo(index){
-
-
-    let guardian =
-    game.guardians[index];
-
+function phaseTwo(number){
 
 
     let shape =
@@ -475,9 +467,10 @@ function phaseTwo(index){
 
     if(shape!==game.player.shape){
 
+
         write(
-        "Only give your own shape now.",
-        "error"
+            "Only give your own shape now.",
+            "error"
         );
 
         return;
@@ -489,13 +482,10 @@ function phaseTwo(index){
     removeSelected();
 
 
+
     write(
-
-    "Sent your " +
-    NAMES[shape] +
-    " to " +
-    guardian.name
-
+        "Sent your shape to Guardian " +
+        (number+1)
     );
 
 
@@ -506,6 +496,10 @@ function phaseTwo(index){
 
     }
 
+
+    clearSelection();
+
+    update();
 
 }
 
@@ -525,10 +519,20 @@ function removeSelected(){
     );
 
 
-    game.selectedSlot=null;
-
 }
 
+
+
+
+function clearSelection(){
+
+    game.selectedSlot=null;
+
+    inventory1.classList.remove("selected");
+
+    inventory2.classList.remove("selected");
+
+}
 
 
 
@@ -538,11 +542,8 @@ function finish(){
 
 
     let key =
-
     SHAPES.filter(
-
         s=>s!==game.player.shape
-
     );
 
 
@@ -559,45 +560,94 @@ function finish(){
 
     game.phase=3;
 
+    game.solved=true;
 
 
-    stopTimer();
-
-
-
-    stats.solved++;
+    clearInterval(game.timer);
 
 
 
-    document.getElementById("solved")
-    .innerHTML=stats.solved;
+    stats.solves++;
+
+
+    solvesDisplay.innerHTML =
+    stats.solves;
+
+
+
+    let time =
+    Math.floor(
+        (Date.now()-game.startTime)/1000
+    );
+
+
+
+    if(
+        !stats.bestTime ||
+        time < stats.bestTime
+    ){
+
+        stats.bestTime=time;
+
+        bestDisplay.innerHTML =
+        time+"s";
+
+    }
 
 
 
     status.innerHTML =
-
-    "SUCCESS — Key created";
-
+    "SUCCESS - Key Created";
 
 
     write(
-
-    "Your final key: " +
-
-    key.join(" + "),
-
-    "success"
-
+        "Your final key: " +
+        key.join(" + "),
+        "success"
     );
-
-
-    update();
 
 
 }
 
 
 
+
+
+// Tools
+
+
+function hint(){
+
+
+    if(game.phase===1){
+
+
+        let wrong =
+        game.player.inventory.find(
+            s=>s!==game.player.shape
+        );
+
+
+        write(
+            "Hint: Send " +
+            SHAPE_NAMES[wrong]
+        );
+
+
+    }
+
+
+    if(game.phase===2){
+
+
+        write(
+            "Hint: Give one of your shapes to each guardian."
+        );
+
+    }
+
+
+}
 
 
 
@@ -607,38 +657,28 @@ function reveal(){
 
 
     write(
-    "=== SECRET STATE ==="
+        "=== SECRET STATE ==="
     );
 
 
     write(
-
-    "You: " +
-
-    game.player.shape +
-
-    " " +
-
-    game.player.inventory.join(" ")
-
+        "You: " +
+        game.player.shape +
+        " " +
+        game.player.inventory.join(" ")
     );
 
 
-
-    game.gu ardians.forEach(g=>{
+    game.guardians.forEach(g=>{
 
 
         write(
 
-        g.name +
-
-        ": " +
-
-        g.shape +
-
-        " " +
-
-        g.inventory.join(" ")
+            g.name +
+            ": " +
+            g.shape +
+            " " +
+            g.inventory.join(" ")
 
         );
 
@@ -652,54 +692,12 @@ function reveal(){
 
 
 
+function resetSelection(){
 
-function hint(){
-
-
-    if(game.phase===1){
-
-        let wrong =
-        game.player.inventory.find(
-            s=>s!==game.player.shape
-        );
-
-
-        write(
-
-        "Hint: Send " +
-        NAMES[wrong] +
-        " to the matching statue."
-
-        );
-
-    }
-
-
-    if(game.phase===2){
-
-        write(
-
-        "Hint: Give one of your own shapes to each guardian."
-
-        );
-
-    }
-
-
-}
-
-
-
-
-
-
-
-function resetMove(){
-
-    game.selectedSlot=null;
+    clearSelection();
 
     write(
-    "Selection cleared."
+        "Selection cleared."
     );
 
 }
@@ -708,23 +706,26 @@ function resetMove(){
 
 
 
+// Timer
+
 
 function startTimer(){
 
 
-    game.timer =
-    setInterval(()=>{
+    game.startTime=Date.now();
+
+
+    game.timer=setInterval(()=>{
 
 
         let seconds =
         Math.floor(
-        (Date.now()-game.startTime)/1000
+            (Date.now()-game.startTime)/1000
         );
 
 
-        document.getElementById("timer")
-        .innerHTML=seconds;
-
+        timerDisplay.innerHTML =
+        seconds;
 
 
     },1000);
@@ -734,55 +735,60 @@ function startTimer(){
 
 
 
-function stopTimer(){
-
-    clearInterval(game.timer);
-
-}
 
 
 
+// Events
 
 
-slot1.onclick=()=>selectSlot(0);
-
-slot2.onclick=()=>selectSlot(1);
-
+inventory1.onclick =
+()=>selectInventory(0);
 
 
-document
-.getElementById("guardianA")
-.onclick=()=>sendToGuardian(0);
-
-
-document
-.getElementById("guardianB")
-.onclick=()=>sendToGuardian(1);
+inventory2.onclick =
+()=>selectInventory(1);
 
 
 
 document
-.getElementById("newGame")
-.onclick=newEncounter;
+.getElementById("guardian1")
+.onclick =
+()=>sendToGuardian(0);
+
+
+
+document
+.getElementById("guardian2")
+.onclick =
+()=>sendToGuardian(1);
+
+
+
+document
+.getElementById("newEncounter")
+.onclick =
+newEncounter;
 
 
 
 document
 .getElementById("hint")
-.onclick=hint;
+.onclick =
+hint;
 
 
 
 document
 .getElementById("reveal")
-.onclick=reveal;
+.onclick =
+reveal;
 
 
 
 document
 .getElementById("reset")
-.onclick=resetMove;
-
+.onclick =
+resetSelection;
 
 
 

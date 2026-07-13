@@ -448,3 +448,5 @@ document
 
 
 newPuzzle();
+
+console.log("Verity trainer loaded");

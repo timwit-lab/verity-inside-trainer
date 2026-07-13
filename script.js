@@ -1,3 +1,5 @@
+alert("Script loaded");
+
 const SHAPES = ["▲", "●", "■"];
 
 const SHAPE_NAMES = {

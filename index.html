@@ -1,271 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verity Inside Trainer</title>
 
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Verity Inside Trainer</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-
 <div class="container">
 
+    <header>
+        <h1>VERITY</h1>
+        <h2>Inside Room Trainer</h2>
 
-<header>
+        <button id="newPuzzle">
+            New Puzzle
+        </button>
+    </header>
 
-<h1>VERITY</h1>
+    <main>
 
-<h2>Inside Room Trainer</h2>
+        <section class="card">
 
-<button id="newEncounter">
-New Encounter
-</button>
+            <h3>Your Statue</h3>
 
-</header>
+            <div id="statueShape" class="shape large">
+                ?
+            </div>
 
+        </section>
 
+        <section class="card">
 
+            <h3>Your Inventory</h3>
 
+            <div id="inventory">
 
-<section class="panel">
+                <button class="inventoryShape" id="shape1">
+                    ?
+                </button>
 
-<h3>Statues</h3>
+                <button class="inventoryShape" id="shape2">
+                    ?
+                </button>
 
+            </div>
 
-<div class="statues">
+        </section>
 
+        <section class="card">
 
-<div class="statue-card">
+            <h3>Other Guardians</h3>
 
-<p>You</p>
+            <div class="guardianRow">
 
-<div id="yourStatue" class="shape">
-?
-</div>
+                <button class="guardian" id="guardianLeft">
 
-</div>
+                    <div class="guardianName">
 
+                        Guardian A
 
+                    </div>
 
-<div class="statue-card">
+                    <div id="leftStatue" class="shape">
 
-<p>Guardian A</p>
+                        ?
 
-<div id="guardianAStatue" class="shape">
-?
-</div>
+                    </div>
 
-</div>
+                </button>
 
+                <button class="guardian" id="guardianRight">
 
+                    <div class="guardianName">
 
-<div class="statue-card">
+                        Guardian B
 
-<p>Guardian B</p>
+                    </div>
 
-<div id="guardianBStatue" class="shape">
-?
-</div>
+                    <div id="rightStatue" class="shape">
 
-</div>
+                        ?
 
+                    </div>
 
-</div>
+                </button>
 
+            </div>
 
-</section>
+        </section>
 
+        <section class="card">
 
+            <h3>Current Phase</h3>
 
+            <div id="phaseText">
 
+                Press "New Puzzle"
 
+            </div>
 
+        </section>
 
-<section class="panel">
+        <section class="card">
 
+            <h3>Encounter Log</h3>
 
-<h3>Your Shapes</h3>
+            <div id="log">
 
+            </div>
 
-<div class="inventory">
+        </section>
 
+    </main>
 
-<button id="inventory1" class="shape-button">
-?
-</button>
+    <footer>
 
+        <button id="checkButton">
 
-<button id="inventory2" class="shape-button">
-?
-</button>
+            Check
 
+        </button>
 
-</div>
+        <button id="revealButton">
 
+            Reveal Solution
 
-</section>
+        </button>
 
-
-
-
-
-
-
-<section class="panel">
-
-
-<h3>Send Selected Shape To</h3>
-
-
-<div class="guardians">
-
-
-<button id="guardian1">
-
-Guardian A
-
-</button>
-
-
-
-<button id="guardian2">
-
-Guardian B
-
-</button>
-
+    </footer>
 
 </div>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="panel">
-
-
-<h3>Status</h3>
-
-
-<div id="status">
-
-Press New Encounter
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="panel">
-
-
-<h3>Encounter Log</h3>
-
-
-<div id="log">
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="panel">
-
-
-<button id="hint">
-
-Hint
-
-</button>
-
-
-
-<button id="reveal">
-
-Reveal Hidden State
-
-</button>
-
-
-
-<button id="reset">
-
-Clear Selection
-
-</button>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="panel">
-
-
-<h3>Stats</h3>
-
-
-<p>
-Solves:
-<span id="solves">0</span>
-</p>
-
-
-<p>
-Best Time:
-<span id="bestTime">--</span>
-</p>
-
-
-<p>
-Time:
-<span id="timer">0</span>s
-</p>
-
-
-</section>
-
-
-
-
-
-</div>
-
-
 
 <script src="script.js"></script>
 
-
 </body>
-
 </html>

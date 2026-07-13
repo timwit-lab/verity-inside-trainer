@@ -2,281 +2,198 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verity Inside Room Trainer</title>
 
-<title>Verity Inside Room Trainer</title>
-
-<link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-
 <div class="container">
 
+    <header>
+        <h1>VERITY</h1>
+        <h2>Inside Room Trainer</h2>
 
-<header>
+        <div class="controls">
 
-<h1>VERITY</h1>
+            <button id="newEncounter">
+                New Encounter
+            </button>
 
-<h2>Inside Room Trainer</h2>
+            <select id="mode">
 
+                <option value="training">
+                    Training Mode
+                </option>
 
-<div class="controls">
+                <option value="raid">
+                    Raid Mode
+                </option>
 
-<button id="newGame">
-New Encounter
-</button>
+                <option value="expert">
+                    Expert Mode
+                </option>
 
+            </select>
 
-<select id="difficulty">
+        </div>
 
-<option value="training">
-Training Mode
-</option>
+    </header>
 
-<option value="raid">
-Raid Mode
-</option>
 
-</select>
+    <section class="panel">
 
+        <h3>Your Room</h3>
 
-</div>
+        <div class="room">
 
-</header>
+            <div class="statue-area">
 
+                <p>Your Statue</p>
 
+                <div id="yourStatue" class="shape">
+                    ?
+                </div>
 
+            </div>
 
 
-<section class="panel">
+            <div class="inventory-area">
 
-<h3>Your Guardian</h3>
+                <p>Your Inventory</p>
 
+                <div class="inventory">
 
-<div class="guardianBox">
+                    <button id="inventory1" class="shape-button">
+                        ?
+                    </button>
 
+                    <button id="inventory2" class="shape-button">
+                        ?
+                    </button>
 
-<div>
+                </div>
 
-Your Statue
+            </div>
 
-<div id="playerStatue" class="shape">
-?
-</div>
+        </div>
 
+    </section>
 
-</div>
 
 
+    <section class="panel">
 
-<div>
+        <h3>Other Guardians</h3>
 
-Your Inventory
 
-<div id="inventory" class="inventory">
+        <div class="guardians">
 
-<button id="slot1">
-?
-</button>
 
+            <button id="guardian1" class="guardian">
 
-<button id="slot2">
-?
-</button>
+                <div>
+                    Guardian A
+                </div>
 
-</div>
+                <div id="guardianStatue1" class="small-shape">
+                    ?
+                </div>
 
-</div>
+            </button>
 
 
-</div>
 
-</section>
+            <button id="guardian2" class="guardian">
 
+                <div>
+                    Guardian B
+                </div>
 
+                <div id="guardianStatue2" class="small-shape">
+                    ?
+                </div>
 
+            </button>
 
 
+        </div>
 
 
+    </section>
 
-<section class="panel">
 
-<h3>Other Guardians</h3>
 
 
-<div class="others">
+    <section class="panel">
 
+        <h3>Status</h3>
 
-<button id="guardianA" class="otherGuardian">
+        <div id="status">
+            Press New Encounter
+        </div>
 
-<div>
-Guardian A
-</div>
+    </section>
 
-<div id="statueA" class="shape small">
-?
-</div>
 
 
-</button>
 
+    <section class="panel">
 
+        <h3>Encounter Log</h3>
 
-<button id="guardianB" class="otherGuardian">
+        <div id="log">
 
+        </div>
 
-<div>
-Guardian B
-</div>
+    </section>
 
 
-<div id="statueB" class="shape small">
-?
-</div>
 
 
-</button>
+    <section class="panel actions">
 
+        <button id="hint">
+            Hint
+        </button>
 
-</div>
+        <button id="reveal">
+            Reveal Solution
+        </button>
 
+        <button id="reset">
+            Reset Selection
+        </button>
 
-</section>
+    </section>
 
 
 
 
+    <section class="panel stats">
 
+        <h3>Stats</h3>
 
+        <p>
+            Solves:
+            <span id="solves">0</span>
+        </p>
 
+        <p>
+            Best Time:
+            <span id="bestTime">--</span>
+        </p>
 
+        <p>
+            Time:
+            <span id="timer">0</span>s
+        </p>
 
-<section class="panel">
-
-
-<h3>Encounter Status</h3>
-
-
-<div id="status">
-
-Press New Encounter
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<section class="panel">
-
-
-<h3>Action Log</h3>
-
-
-<div id="log">
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section class="panel">
-
-
-<h3>Training Tools</h3>
-
-
-<button id="hint">
-Hint
-</button>
-
-
-<button id="reveal">
-Reveal Solution
-</button>
-
-
-<button id="reset">
-Reset Move
-</button>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section class="panel stats">
-
-
-<h3>Stats</h3>
-
-
-<div>
-
-Solved:
-
-<span id="solved">
-0
-</span>
-
-</div>
-
-
-<div>
-
-Best Time:
-
-<span id="best">
---
-
-</span>
-
-</div>
-
-
-<div>
-
-Timer:
-
-<span id="timer">
-0
-
-</span>s
-
-</div>
-
-
-</section>
-
-
-
+    </section>
 
 
 </div>
@@ -284,7 +201,6 @@ Timer:
 
 
 <script src="script.js"></script>
-
 
 </body>
 

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verity Inside Trainer</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>VERITY</h1>
+        <h2>Inside Room Trainer</h2>
+
+        <button id="newPuzzle">
+            New Puzzle
+        </button>
+    </header>
+
+    <main>
+
+        <section class="card">
+
+            <h3>Your Statue</h3>
+
+            <div id="statueShape" class="shape large">
+                ?
+            </div>
+
+        </section>
+
+        <section class="card">
+
+            <h3>Your Inventory</h3>
+
+            <div id="inventory">
+
+                <button class="inventoryShape" id="shape1">
+                    ?
+                </button>
+
+                <button class="inventoryShape" id="shape2">
+                    ?
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="card">
+
+            <h3>Other Guardians</h3>
+
+            <div class="guardianRow">
+
+                <button class="guardian" id="guardianLeft">
+
+                    <div class="guardianName">
+
+                        Guardian A
+
+                    </div>
+
+                    <div id="leftStatue" class="shape">
+
+                        ?
+
+                    </div>
+
+                </button>
+
+                <button class="guardian" id="guardianRight">
+
+                    <div class="guardianName">
+
+                        Guardian B
+
+                    </div>
+
+                    <div id="rightStatue" class="shape">
+
+                        ?
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="card">
+
+            <h3>Current Phase</h3>
+
+            <div id="phaseText">
+
+                Press "New Puzzle"
+
+            </div>
+
+        </section>
+
+        <section class="card">
+
+            <h3>Encounter Log</h3>
+
+            <div id="log">
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <button id="checkButton">
+
+            Check
+
+        </button>
+
+        <button id="revealButton">
+
+            Reveal Solution
+
+        </button>
+
+    </footer>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
